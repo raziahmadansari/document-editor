@@ -9,7 +9,8 @@
 
 .main-container {
   --ckeditor5-preview-sidebar-width: 270px;
-  --ckeditor5-preview-height: 700px;
+  // --ckeditor5-preview-height: 700px;
+  --ckeditor5-preview-height: calc(100vh - 130px);
   font-family: "Lato";
   width: fit-content;
   margin-left: auto;
