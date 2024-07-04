@@ -30,8 +30,8 @@ export class AnnotationsSidebarToggler extends Plugin {
     ) as AnnotationsUIs;
     const annotationsContainer = this.editor.config.get(
       'sidebar.container'
-    )! as HTMLElement;
-    const sidebarContainer = annotationsContainer.parentElement! as HTMLElement;
+    )! as HTMLDivElement;
+    const sidebarContainer = annotationsContainer.parentElement!;
 
     this.toggleButton.set({
       label: 'Toggle annotations sidebar',

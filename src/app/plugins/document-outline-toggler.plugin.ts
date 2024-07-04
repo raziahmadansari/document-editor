@@ -22,7 +22,7 @@ export class DocumentOutlineToggler extends Plugin {
 
     const documentOutlineContainer = this.editor.config.get(
       'documentOutline.container'
-    )!;
+    )! as HTMLDivElement;
     const sidebarContainer = documentOutlineContainer.parentElement!;
 
     this.toggleButton.set({
