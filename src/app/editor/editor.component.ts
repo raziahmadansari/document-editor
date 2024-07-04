@@ -91,10 +91,10 @@ import {
   Pagination,
   PasteFromOfficeEnhanced,
   PresenceList,
-  RealTimeCollaborativeComments,
-  RealTimeCollaborativeEditing,
-  RealTimeCollaborativeRevisionHistory,
-  RealTimeCollaborativeTrackChanges,
+  // RealTimeCollaborativeComments,
+  // RealTimeCollaborativeEditing,
+  // RealTimeCollaborativeRevisionHistory,
+  // RealTimeCollaborativeTrackChanges,
   RevisionHistory,
   SlashCommand,
   TableOfContents,
@@ -102,6 +102,9 @@ import {
   TrackChanges,
   TrackChangesData,
 } from 'ckeditor5-premium-features';
+
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 import {
   AI_API_URL,
@@ -112,7 +115,12 @@ import {
   LICENSE_KEY,
   UNIQUE_CHANNEL_PER_DOCUMENT,
 } from '../models/editor.constant';
-import { AnnotationsSidebarToggler, DocumentOutlineToggler } from '../plugins';
+import {
+  AnnotationsSidebarToggler,
+  CommentsIntegration,
+  DocumentOutlineToggler,
+  UsersIntegration,
+} from '../plugins';
 
 @Component({
   selector: 'app-editor',
@@ -166,19 +174,19 @@ export class EditorComponent implements AfterViewInit {
           'nextPage',
           'pageNavigation',
           '|',
-          'revisionHistory',
-          'trackChanges',
+          // 'revisionHistory',
+          // 'trackChanges',
           'comment',
           'commentsArchive',
           '|',
-          'aiCommands',
-          'aiAssistant',
-          '|',
-          'importWord',
-          'exportWord',
-          'exportPdf',
-          'formatPainter',
-          'caseChange',
+          // 'aiCommands',
+          // 'aiAssistant',
+          // '|',
+          // 'importWord',
+          // 'exportWord',
+          // 'exportPdf',
+          // 'formatPainter',
+          // 'caseChange',
           'findAndReplace',
           'selectAll',
           '|',
@@ -196,27 +204,27 @@ export class EditorComponent implements AfterViewInit {
           'subscript',
           'superscript',
           'code',
-          'removeFormat',
+          // 'removeFormat',
           '|',
           'specialCharacters',
           'horizontalLine',
           'pageBreak',
           'link',
-          'insertImage',
+          // 'insertImage',
           'insertImageViaUrl',
-          'ckbox',
+          // 'ckbox',
           'insertTable',
-          'tableOfContents',
-          'insertTemplate',
+          // 'tableOfContents',
+          // 'insertTemplate',
           'highlight',
           'blockQuote',
           '|',
           'alignment',
           '|',
-          'bulletedList',
-          'numberedList',
-          'multiLevelList',
-          'todoList',
+          // 'bulletedList',
+          // 'numberedList',
+          // 'multiLevelList',
+          // 'todoList',
           'indent',
           'outdent',
           '|',
@@ -226,7 +234,7 @@ export class EditorComponent implements AfterViewInit {
       },
       plugins: [
         AccessibilityHelp,
-        AIAssistant,
+        // AIAssistant,
         Alignment,
         Autoformat,
         AutoImage,
@@ -235,61 +243,61 @@ export class EditorComponent implements AfterViewInit {
         BalloonToolbar,
         BlockQuote,
         Bold,
-        CaseChange,
-        CKBox,
-        CKBoxImageEdit,
-        CloudServices,
+        // CaseChange,
+        // CKBox,
+        // CKBoxImageEdit,
+        // CloudServices,
         Code,
         Comments,
         DocumentOutline,
         Essentials,
-        ExportPdf,
-        ExportWord,
+        // ExportPdf,
+        // ExportWord,
         FindAndReplace,
         FontBackgroundColor,
         FontColor,
         FontFamily,
         FontSize,
-        FormatPainter,
+        // FormatPainter,
         Heading,
         Highlight,
         HorizontalLine,
         ImageBlock,
         ImageCaption,
         ImageInline,
-        ImageInsert,
+        // ImageInsert,
         ImageInsertViaUrl,
         ImageResize,
         ImageStyle,
         ImageTextAlternative,
         ImageToolbar,
-        ImageUpload,
-        ImportWord,
+        // ImageUpload,
+        // ImportWord,
         Indent,
         IndentBlock,
         Italic,
         Link,
         LinkImage,
-        List,
-        ListProperties,
+        // List,
+        // ListProperties,
         Mention,
-        MultiLevelList,
-        OpenAITextAdapter,
+        // MultiLevelList,
+        // OpenAITextAdapter,
         PageBreak,
         Pagination,
         Paragraph,
         PasteFromOffice,
-        PasteFromOfficeEnhanced,
-        PictureEditing,
-        PresenceList,
-        RealTimeCollaborativeComments,
-        RealTimeCollaborativeEditing,
-        RealTimeCollaborativeRevisionHistory,
-        RealTimeCollaborativeTrackChanges,
-        RemoveFormat,
-        RevisionHistory,
+        // PasteFromOfficeEnhanced,
+        // PictureEditing,
+        // PresenceList,
+        // RealTimeCollaborativeComments,
+        // RealTimeCollaborativeEditing,
+        // RealTimeCollaborativeRevisionHistory,
+        // RealTimeCollaborativeTrackChanges,
+        // RemoveFormat,
+        // RevisionHistory,
         SelectAll,
-        SlashCommand,
+        // SlashCommand,
         SpecialCharacters,
         SpecialCharactersArrows,
         SpecialCharactersCurrency,
@@ -304,57 +312,62 @@ export class EditorComponent implements AfterViewInit {
         TableCaption,
         TableCellProperties,
         TableColumnResize,
-        TableOfContents,
+        // TableOfContents,
         TableProperties,
         TableToolbar,
-        Template,
+        // Template,
         TextTransformation,
-        TodoList,
-        TrackChanges,
-        TrackChangesData,
+        // TodoList,
+        // TrackChanges,
+        // TrackChangesData,
         Underline,
         Undo,
       ],
-      extraPlugins: [DocumentOutlineToggler, AnnotationsSidebarToggler],
-      ai: {
-        openAI: {
-          apiUrl: AI_API_URL,
-          requestHeaders: {
-            Authorization: AI_AUTH_TOKEN,
-          },
-          requestParameters: {
-            model: 'gpt-3.5-turbo-1106',
-            max_tokens: 4000,
-          },
-        },
-        aiAssistant: {
-          contentAreaCssClass: 'formatted',
-        },
-      },
+      extraPlugins: [
+        DocumentOutlineToggler,
+        AnnotationsSidebarToggler,
+        UsersIntegration,
+        CommentsIntegration,
+      ],
+      // ai: {
+      //   openAI: {
+      //     apiUrl: AI_API_URL,
+      //     requestHeaders: {
+      //       Authorization: AI_AUTH_TOKEN,
+      //     },
+      //     requestParameters: {
+      //       model: 'gpt-3.5-turbo-1106',
+      //       max_tokens: 4000,
+      //     },
+      //   },
+      //   aiAssistant: {
+      //     contentAreaCssClass: 'formatted',
+      //   },
+      // },
       balloonToolbar: [
         'comment',
-        '|',
-        'aiAssistant',
-        '|',
+        // '|',
+        // 'aiAssistant',
+        // '|',
         'bold',
         'italic',
         '|',
         'link',
-        'insertImage',
-        '|',
-        'bulletedList',
-        'numberedList',
+        // 'insertImage',
+        // '|',
+        // 'bulletedList',
+        // 'numberedList',
       ],
-      ckbox: {
-        tokenUrl: CKBOX_TOKEN_URL,
-      },
-      cloudServices: {
-        tokenUrl: CLOUD_SERVICES_TOKEN_URL,
-        webSocketUrl: CLOUD_SERVICES_WEBSOCKET_URL,
-      },
-      collaboration: {
-        channelId: UNIQUE_CHANNEL_PER_DOCUMENT,
-      },
+      // ckbox: {
+      //   tokenUrl: CKBOX_TOKEN_URL,
+      // },
+      // cloudServices: {
+      //   tokenUrl: CLOUD_SERVICES_TOKEN_URL,
+      //   webSocketUrl: CLOUD_SERVICES_WEBSOCKET_URL,
+      // },
+      // collaboration: {
+      //   channelId: UNIQUE_CHANNEL_PER_DOCUMENT,
+      // },
       comments: {
         editorConfig: {
           extraPlugins: [Autoformat, Bold, Italic, List, Mention],
@@ -364,6 +377,11 @@ export class EditorComponent implements AfterViewInit {
                 marker: '@',
                 feed: [
                   /* See: https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#comments-with-mentions */
+                  '@Baby Doe',
+                  '@Joe Doe',
+                  '@Jane Doe',
+                  '@Jane Roe',
+                  '@Richard Roe',
                 ],
               },
             ],
@@ -373,44 +391,44 @@ export class EditorComponent implements AfterViewInit {
       documentOutline: {
         container: this.editorOutline.nativeElement,
       },
-      exportPdf: {
-        stylesheets: [
-          /* This path should point to application stylesheets. */
-          /* See: https://ckeditor.com/docs/ckeditor5/latest/features/converters/export-pdf.html */
-          './styles.css',
-          /* Export PDF needs access to stylesheets that style the content. */
-          'https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.css',
-          'https://cdn.ckeditor.com/ckeditor5-premium-features/42.0.0/ckeditor5-premium-features.css',
-        ],
-        fileName: 'export-pdf-demo.pdf',
-        converterOptions: {
-          format: 'A4',
-          margin_top: '20mm',
-          margin_bottom: '20mm',
-          margin_right: '12mm',
-          margin_left: '12mm',
-          page_orientation: 'portrait',
-        },
-      },
-      exportWord: {
-        stylesheets: [
-          /* This path should point to application stylesheets. */
-          /* See: https://ckeditor.com/docs/ckeditor5/latest/features/converters/export-word.html */
-          './styles.css',
-          /* Export Word needs access to stylesheets that style the content. */
-          'https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.css',
-          'https://cdn.ckeditor.com/ckeditor5-premium-features/42.0.0/ckeditor5-premium-features.css',
-        ],
-        fileName: 'export-word-demo.docx',
-        converterOptions: {
-          format: 'A4',
-          margin_top: '20mm',
-          margin_bottom: '20mm',
-          margin_right: '12mm',
-          margin_left: '12mm',
-          orientation: 'portrait',
-        },
-      },
+      // exportPdf: {
+      //   stylesheets: [
+      //     /* This path should point to application stylesheets. */
+      //     /* See: https://ckeditor.com/docs/ckeditor5/latest/features/converters/export-pdf.html */
+      //     './styles.css',
+      //     /* Export PDF needs access to stylesheets that style the content. */
+      //     'https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.css',
+      //     'https://cdn.ckeditor.com/ckeditor5-premium-features/42.0.0/ckeditor5-premium-features.css',
+      //   ],
+      //   fileName: 'export-pdf-demo.pdf',
+      //   converterOptions: {
+      //     format: 'A4',
+      //     margin_top: '20mm',
+      //     margin_bottom: '20mm',
+      //     margin_right: '12mm',
+      //     margin_left: '12mm',
+      //     page_orientation: 'portrait',
+      //   },
+      // },
+      // exportWord: {
+      //   stylesheets: [
+      //     /* This path should point to application stylesheets. */
+      //     /* See: https://ckeditor.com/docs/ckeditor5/latest/features/converters/export-word.html */
+      //     './styles.css',
+      //     /* Export Word needs access to stylesheets that style the content. */
+      //     'https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.css',
+      //     'https://cdn.ckeditor.com/ckeditor5-premium-features/42.0.0/ckeditor5-premium-features.css',
+      //   ],
+      //   fileName: 'export-word-demo.docx',
+      //   converterOptions: {
+      //     format: 'A4',
+      //     margin_top: '20mm',
+      //     margin_bottom: '20mm',
+      //     margin_right: '12mm',
+      //     margin_left: '12mm',
+      //     orientation: 'portrait',
+      //   },
+      // },
       fontFamily: {
         supportAllValues: true,
       },
@@ -473,8 +491,8 @@ export class EditorComponent implements AfterViewInit {
           'imageStyle:breakText',
           '|',
           'resizeImage',
-          '|',
-          'ckboxImageEdit',
+          // '|',
+          // 'ckboxImageEdit',
         ],
       },
       initialData:
@@ -493,19 +511,24 @@ export class EditorComponent implements AfterViewInit {
           },
         },
       },
-      list: {
-        properties: {
-          styles: true,
-          startIndex: true,
-          reversed: true,
-        },
-      },
+      // list: {
+      //   properties: {
+      //     styles: true,
+      //     startIndex: true,
+      //     reversed: true,
+      //   },
+      // },
       mention: {
         feeds: [
           {
             marker: '@',
             feed: [
               /* See: https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html */
+              '@Baby Doe',
+              '@Joe Doe',
+              '@Jane Doe',
+              '@Jane Roe',
+              '@Richard Roe',
             ],
           },
         ],
@@ -514,6 +537,7 @@ export class EditorComponent implements AfterViewInit {
         isVisible: true,
       },
       pagination: {
+        // A4
         pageWidth: '21cm',
         pageHeight: '29.7cm',
         pageMargins: {
@@ -522,18 +546,19 @@ export class EditorComponent implements AfterViewInit {
           right: '12mm',
           left: '12mm',
         },
+        enableOnUnsupportedBrowsers: true,
       },
       placeholder: 'Type or paste your content here!',
-      presenceList: {
-        container: this.editorPresence.nativeElement,
-      },
-      revisionHistory: {
-        editorContainer: this.editorContainer.nativeElement,
-        viewerContainer: this.editorRevisionHistory.nativeElement,
-        viewerEditorElement: this.editorRevisionHistoryEditor.nativeElement,
-        viewerSidebarContainer: this.editorRevisionHistorySidebar.nativeElement,
-        resumeUnsavedRevision: true,
-      },
+      // presenceList: {
+      //   container: this.editorPresence.nativeElement,
+      // },
+      // revisionHistory: {
+      //   editorContainer: this.editorContainer.nativeElement,
+      //   viewerContainer: this.editorRevisionHistory.nativeElement,
+      //   viewerEditorElement: this.editorRevisionHistoryEditor.nativeElement,
+      //   viewerSidebarContainer: this.editorRevisionHistorySidebar.nativeElement,
+      //   resumeUnsavedRevision: true,
+      // },
       sidebar: {
         container: this.editorAnnotations.nativeElement,
       },
@@ -546,16 +571,16 @@ export class EditorComponent implements AfterViewInit {
           'tableCellProperties',
         ],
       },
-      template: {
-        definitions: [
-          {
-            title: 'Introduction',
-            description: 'Simple introduction to an article',
-            icon: '<svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">\n    <g id="icons/article-image-right">\n        <rect id="icon-bg" width="45" height="45" rx="2" fill="#A5E7EB"/>\n        <g id="page" filter="url(#filter0_d_1_507)">\n            <path d="M9 41H36V12L28 5H9V41Z" fill="white"/>\n            <path d="M35.25 12.3403V40.25H9.75V5.75H27.7182L35.25 12.3403Z" stroke="#333333" stroke-width="1.5"/>\n        </g>\n        <g id="image">\n            <path id="Rectangle 22" d="M21.5 23C21.5 22.1716 22.1716 21.5 23 21.5H31C31.8284 21.5 32.5 22.1716 32.5 23V29C32.5 29.8284 31.8284 30.5 31 30.5H23C22.1716 30.5 21.5 29.8284 21.5 29V23Z" fill="#B6E3FC" stroke="#333333"/>\n            <path id="Vector 1" d="M24.1184 27.8255C23.9404 27.7499 23.7347 27.7838 23.5904 27.9125L21.6673 29.6268C21.5124 29.7648 21.4589 29.9842 21.5328 30.178C21.6066 30.3719 21.7925 30.5 22 30.5H32C32.2761 30.5 32.5 30.2761 32.5 30V27.7143C32.5 27.5717 32.4391 27.4359 32.3327 27.3411L30.4096 25.6268C30.2125 25.451 29.9127 25.4589 29.7251 25.6448L26.5019 28.8372L24.1184 27.8255Z" fill="#44D500" stroke="#333333" stroke-linejoin="round"/>\n            <circle id="Ellipse 1" cx="26" cy="25" r="1.5" fill="#FFD12D" stroke="#333333"/>\n        </g>\n        <rect id="Rectangle 23" x="13" y="13" width="12" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 24" x="13" y="17" width="19" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 25" x="13" y="21" width="6" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 26" x="13" y="25" width="6" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 27" x="13" y="29" width="6" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 28" x="13" y="33" width="16" height="2" rx="1" fill="#B4B4B4"/>\n    </g>\n    <defs>\n        <filter id="filter0_d_1_507" x="9" y="5" width="28" height="37" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">\n            <feFlood flood-opacity="0" result="BackgroundImageFix"/>\n            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>\n            <feOffset dx="1" dy="1"/>\n            <feComposite in2="hardAlpha" operator="out"/>\n            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.29 0"/>\n            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_507"/>\n            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_507" result="shape"/>\n        </filter>\n    </defs>\n</svg>\n',
-            data: "<h2>Introduction</h2><p>In today's fast-paced world, keeping up with the latest trends and insights is essential for both personal growth and professional development. This article aims to shed light on a topic that resonates with many, providing valuable information and actionable advice. Whether you're seeking to enhance your knowledge, improve your skills, or simply stay informed, our comprehensive analysis offers a deep dive into the subject matter, designed to empower and inspire our readers.</p>",
-          },
-        ],
-      },
+      // template: {
+      //   definitions: [
+      //     {
+      //       title: 'Introduction',
+      //       description: 'Simple introduction to an article',
+      //       icon: '<svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">\n    <g id="icons/article-image-right">\n        <rect id="icon-bg" width="45" height="45" rx="2" fill="#A5E7EB"/>\n        <g id="page" filter="url(#filter0_d_1_507)">\n            <path d="M9 41H36V12L28 5H9V41Z" fill="white"/>\n            <path d="M35.25 12.3403V40.25H9.75V5.75H27.7182L35.25 12.3403Z" stroke="#333333" stroke-width="1.5"/>\n        </g>\n        <g id="image">\n            <path id="Rectangle 22" d="M21.5 23C21.5 22.1716 22.1716 21.5 23 21.5H31C31.8284 21.5 32.5 22.1716 32.5 23V29C32.5 29.8284 31.8284 30.5 31 30.5H23C22.1716 30.5 21.5 29.8284 21.5 29V23Z" fill="#B6E3FC" stroke="#333333"/>\n            <path id="Vector 1" d="M24.1184 27.8255C23.9404 27.7499 23.7347 27.7838 23.5904 27.9125L21.6673 29.6268C21.5124 29.7648 21.4589 29.9842 21.5328 30.178C21.6066 30.3719 21.7925 30.5 22 30.5H32C32.2761 30.5 32.5 30.2761 32.5 30V27.7143C32.5 27.5717 32.4391 27.4359 32.3327 27.3411L30.4096 25.6268C30.2125 25.451 29.9127 25.4589 29.7251 25.6448L26.5019 28.8372L24.1184 27.8255Z" fill="#44D500" stroke="#333333" stroke-linejoin="round"/>\n            <circle id="Ellipse 1" cx="26" cy="25" r="1.5" fill="#FFD12D" stroke="#333333"/>\n        </g>\n        <rect id="Rectangle 23" x="13" y="13" width="12" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 24" x="13" y="17" width="19" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 25" x="13" y="21" width="6" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 26" x="13" y="25" width="6" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 27" x="13" y="29" width="6" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 28" x="13" y="33" width="16" height="2" rx="1" fill="#B4B4B4"/>\n    </g>\n    <defs>\n        <filter id="filter0_d_1_507" x="9" y="5" width="28" height="37" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">\n            <feFlood flood-opacity="0" result="BackgroundImageFix"/>\n            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>\n            <feOffset dx="1" dy="1"/>\n            <feComposite in2="hardAlpha" operator="out"/>\n            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.29 0"/>\n            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_507"/>\n            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_507" result="shape"/>\n        </filter>\n    </defs>\n</svg>\n',
+      //       data: "<h2>Introduction</h2><p>In today's fast-paced world, keeping up with the latest trends and insights is essential for both personal growth and professional development. This article aims to shed light on a topic that resonates with many, providing valuable information and actionable advice. Whether you're seeking to enhance your knowledge, improve your skills, or simply stay informed, our comprehensive analysis offers a deep dive into the subject matter, designed to empower and inspire our readers.</p>",
+      //     },
+      //   ],
+      // },
     };
 
     // configUpdateAlert(this.config);
@@ -578,5 +603,7 @@ export class EditorComponent implements AfterViewInit {
     this.editorMenuBar.nativeElement.appendChild(
       editor.ui.view.menuBarView.element!
     );
+
+    (window as any).editor = editor;
   }
 }
